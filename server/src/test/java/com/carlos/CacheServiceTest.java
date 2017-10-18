@@ -32,5 +32,4 @@ public class CacheServiceTest {
         Assert.assertTrue(cacheService.getWords("abc").contains("cba"));
     }
 
-
 }

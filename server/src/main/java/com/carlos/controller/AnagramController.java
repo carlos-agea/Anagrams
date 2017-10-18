@@ -28,5 +28,4 @@ public class AnagramController {
         return cacheService.getWords(anagramService.calculateAnagramKey(word));
     }
 
-
 }
