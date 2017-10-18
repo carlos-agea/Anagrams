@@ -1,7 +1,7 @@
 package com.carlos.controller;
 
 import com.carlos.service.AnagramService;
-import com.carlos.service.FileService;
+import com.carlos.service.CacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,15 +15,17 @@ import java.util.List;
 public class AnagramController {
 
     private AnagramService anagramService;
+    private CacheService cacheService;
 
     @Autowired
-    public void setAnagramService(AnagramService anagramService) {
+    public void setAnagramService(AnagramService anagramService, CacheService cacheService) {
         this.anagramService = anagramService;
+        this.cacheService = cacheService;
     }
 
     @RequestMapping(value = "/{word}", method = RequestMethod.GET)
     public List<String> getAnagram(@PathVariable("word") String word) {
-        return anagramService.getAnagrams(word);
+        return cacheService.getWords(anagramService.calculateAnagramKey(word));
     }
 
 

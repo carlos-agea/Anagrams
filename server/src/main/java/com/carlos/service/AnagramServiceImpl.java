@@ -11,36 +11,10 @@ import java.util.stream.Stream;
 @Service
 public class AnagramServiceImpl implements AnagramService {
 
-    private FileService fileService;
-
-    public AnagramServiceImpl() {
-        try {
-            loadWordsDictionary(fileService.loadWords());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Autowired
-    public void setFileService(FileService fileService) {
-        this.fileService = fileService;
-    }
-
     @Override
-    public List<String> getAnagrams(String word) {
-        // TODO
-        return Arrays.asList(word);
+    public String calculateAnagramKey(String word) {
+        char[] chars = word.toCharArray();
+        Arrays.sort(chars);
+        return new String(chars);
     }
-
-    @Override
-    public void updateAnagram(String word) {
-
-    }
-
-    private void loadWordsDictionary(Stream<String> words) {
-        // TODO
-    }
-
-
-
 }

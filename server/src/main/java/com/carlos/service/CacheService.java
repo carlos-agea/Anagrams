@@ -1,10 +1,10 @@
 package com.carlos.service;
 
-import com.carlos.model.Anagram;
-
 import java.util.List;
+import java.util.stream.Stream;
 
 public interface CacheService {
-    Anagram getAnagram(String anagramKey);
-    void updateAnagram(String anagram);
+    List<String> getWords(String anagramKey);
+    void updateAnagram(String anagramKey, String word);
+    void loadWordsDictionary(Stream<String> linesStream);
 }

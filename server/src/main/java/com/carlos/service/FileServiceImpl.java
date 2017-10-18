@@ -13,15 +13,15 @@ import java.util.stream.Stream;
 public class FileServiceImpl implements FileService {
 
     @Value("${words.file_path}")
-    private String wordsFilePatah;
+    private String filePath;
 
     @Override
     public Stream<String> loadWords() throws IOException {
-        return Files.lines(Paths.get(wordsFilePatah));
+        return Files.lines(Paths.get(filePath));
     }
 
     @Override
     public void updateWords(List<String> words) {
-
+        //TODO
     }
 }
