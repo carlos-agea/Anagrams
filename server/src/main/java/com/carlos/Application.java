@@ -1,7 +1,7 @@
 package com.carlos;
 
 import com.carlos.service.CacheService;
-import com.carlos.service.FileService;
+import com.carlos.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +14,7 @@ import java.io.IOException;
 public class Application implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
-    private FileService fileService;
+    private DataService dataService;
 
     @Autowired
     private CacheService cacheService;
@@ -26,7 +26,7 @@ public class Application implements ApplicationListener<ContextRefreshedEvent> {
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         try {
-            cacheService.loadWordsDictionary(fileService.loadWords());
+            cacheService.loadWordsDictionary(dataService.loadWords());
         } catch (IOException e) {
             e.printStackTrace();
         }

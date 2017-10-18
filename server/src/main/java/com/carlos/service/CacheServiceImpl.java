@@ -13,9 +13,11 @@ public class CacheServiceImpl implements CacheService {
 
     private ConcurrentMap<String, List<String>> cache;
     private AnagramService anagramService;
+    private DataService dataService;
 
-    public CacheServiceImpl(AnagramService anagramService) {
+    public CacheServiceImpl(AnagramService anagramService, DataService dataService) {
         this.anagramService = anagramService;
+        this.dataService = dataService;
         this.cache = new ConcurrentHashMap<>();
     }
 
@@ -32,15 +34,23 @@ public class CacheServiceImpl implements CacheService {
                 words.add(word);
                 return words;
             } else {
-                v.add(word);
+                if(!v.contains(word)) v.add(word);
                 return v;
             }
         });
     }
 
+    @Override
+    public void write(String anagramKey, String word) {
+        this.updateAnagram(anagramKey, word);
+        persist(word);
+    }
     public void loadWordsDictionary(Stream<String> linesStream) {
         linesStream
                 .forEach(word -> updateAnagram(anagramService.calculateAnagramKey(word), word));
     }
 
+    private void persist(String word) {
+        this.dataService.write(word);
+    }
 }

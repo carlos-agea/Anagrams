@@ -28,4 +28,10 @@ public class AnagramController {
         return cacheService.getWords(anagramService.calculateAnagramKey(word));
     }
 
+    @RequestMapping(value = "/{word}", method = RequestMethod.POST)
+    public List<String> setAnagram(@PathVariable("word") String word) {
+        cacheService.write(anagramService.calculateAnagramKey(word), word);
+        return cacheService.getWords(anagramService.calculateAnagramKey(word));
+    }
+
 }

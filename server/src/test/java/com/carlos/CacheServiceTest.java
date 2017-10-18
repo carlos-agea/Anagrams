@@ -3,10 +3,13 @@ package com.carlos;
 import com.carlos.service.AnagramService;
 import com.carlos.service.CacheService;
 import com.carlos.service.CacheServiceImpl;
+import com.carlos.service.DataService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+
+import javax.xml.crypto.Data;
 
 public class CacheServiceTest {
 
@@ -15,9 +18,12 @@ public class CacheServiceTest {
     @Mock
     private AnagramService anagramServiceMock;
 
+    @Mock
+    private DataService dataService;
+
     @Before
     public void setUp() {
-        cacheService = new CacheServiceImpl(anagramServiceMock);
+        cacheService = new CacheServiceImpl(anagramServiceMock, dataService);
     }
 
     @Test

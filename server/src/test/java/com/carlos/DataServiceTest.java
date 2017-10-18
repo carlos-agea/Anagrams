@@ -14,14 +14,13 @@ import java.util.stream.Stream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class FileServiceTest {
+public class DataServiceTest {
 
     @Autowired
-    private FileService fileService;
+    private DataService dataService;
 
     @Before
     public void setUp() {
-        //fileService = new FileServiceImpl();
     }
 
     @Test
@@ -31,7 +30,7 @@ public class FileServiceTest {
 
         // When
         try {
-            wordsStream = fileService.loadWords();
+            wordsStream = dataService.loadWords();
         } catch (IOException e) {
             e.printStackTrace();
         }
